@@ -59,10 +59,10 @@ namespace LootTableEditor
 		Random random = new Random();
 		private void OnLootDrop(NpcLootDropEventArgs args)
 		{
+			#if DEBUG
+			Console.WriteLine("NPCID:{0}[NPCArrayIndex:{1}]: (X:{2}, Y:{3}) - Item:{4}", args.NpcId, args.NpcArrayIndex, args.Position.X, args.Position.Y, args.ItemId);
+			#endif
 			
-			Console.WriteLine("{0}[{1}]: ({2}, {3}) - Item:{4}", args.NpcId, args.NpcArrayIndex, args.Position.X, args.Position.Y,
-			      args.ItemId);
-
 			if (config.LootReplacements.ContainsKey(args.NpcId))
 			{
 				DropReplacement repl = config.LootReplacements[args.NpcId];
@@ -77,7 +77,11 @@ namespace LootTableEditor
 							var item = TShock.Utils.GetItemById(d.itemID);
 							int stack = random.Next(d.low_stack, d.high_stack + 1);
 							Item.NewItem(args.Source, (int)args.Position.X, (int)args.Position.Y, item.width, item.height, d.itemID, stack, args.Broadcast, d.prefix);
-
+							
+							#if DEBUG
+							Console.WriteLine("LootTableEditor: BloodMoonDrop ItemID:{0} - Amount:{1} - (X:{2}, Y:{3})", d.itemID, stack, args.Position.X, args.Position.Y);
+							#endif
+							
 							args.Handled = true;
 
 							if (!repl.tryEachItem)
@@ -97,6 +101,10 @@ namespace LootTableEditor
 							int stack = random.Next(d.low_stack, d.high_stack + 1);
 							Item.NewItem(args.Source, (int)args.Position.X, (int)args.Position.Y, item.width, item.height, d.itemID, stack, args.Broadcast, d.prefix);
 
+							#if DEBUG
+							Console.WriteLine("LootTableEditor: EclipseDrop ItemID:{0} - Amount:{1} - (X:{2}, Y:{3})", d.itemID, stack, args.Position.X, args.Position.Y);
+							#endif
+							
 							args.Handled = true;
 
 							if (!repl.tryEachItem)
@@ -116,6 +124,10 @@ namespace LootTableEditor
 							int stack = random.Next(d.low_stack, d.high_stack + 1);
 							Item.NewItem(args.Source, (int)args.Position.X, (int)args.Position.Y, item.width, item.height, d.itemID, stack, args.Broadcast, d.prefix);
 
+							#if DEBUG
+							Console.WriteLine("LootTableEditor: FullmoonDrop ItemID:{0} - Amount:{1} - (X:{2}, Y:{3})", d.itemID, stack, args.Position.X, args.Position.Y);
+							#endif
+							
 							args.Handled = true;
 
 							if (!repl.tryEachItem)
@@ -135,6 +147,10 @@ namespace LootTableEditor
 							int stack = random.Next(d.low_stack, d.high_stack + 1);
 							Item.NewItem(args.Source, (int)args.Position.X, (int)args.Position.Y, item.width, item.height, d.itemID, stack, args.Broadcast, d.prefix);
 
+							#if DEBUG
+							Console.WriteLine("LootTableEditor: NightDrop ItemID:{0} - Amount:{1} - (X:{2}, Y:{3})", d.itemID, stack, args.Position.X, args.Position.Y);
+							#endif
+							
 							args.Handled = true;
 
 							if (!repl.tryEachItem)
@@ -154,6 +170,10 @@ namespace LootTableEditor
 							int stack = random.Next(d.low_stack, d.high_stack + 1);
 							Item.NewItem(args.Source, (int)args.Position.X, (int)args.Position.Y, item.width, item.height, d.itemID, stack, args.Broadcast, d.prefix);
 
+							#if DEBUG
+							Console.WriteLine("LootTableEditor: DayDrop ItemID:{0} - Amount:{1} - (X:{2}, Y:{3})", d.itemID, stack, args.Position.X, args.Position.Y);
+							#endif
+							
 							args.Handled = true;
 
 							if (!repl.tryEachItem)
@@ -173,7 +193,11 @@ namespace LootTableEditor
 							int stack = random.Next(d.low_stack, d.high_stack + 1);
 							Item.NewItem(args.Source, (int)args.Position.X, (int)args.Position.Y, item.width, item.height, d.itemID, stack, args.Broadcast, d.prefix);
 							args.Handled = true;
-
+	
+							#if DEBUG
+							Console.WriteLine("LootTableEditor: NormalDrop ItemID:{0} - Amount:{1} - (X:{2}, Y:{3})", d.itemID, stack, args.Position.X, args.Position.Y);
+							#endif
+							
 							if (!repl.tryEachItem)
 								break;
 						}
