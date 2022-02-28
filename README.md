@@ -13,6 +13,7 @@ States:
 - Day
 - Fullmoon
 
+```json
 {
   "1": { // NPC ID
     "drops": {
@@ -53,5 +54,6 @@ States:
     "alsoDropDefaultLoot": false // If this is set to "true" it will also drop the normal loot defined by Terraria itself
   }
 }
+```
 
 if you want to use this config make sure to remove all the // COMMENTS because JSON doesn't have comments
